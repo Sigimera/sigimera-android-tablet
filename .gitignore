@@ -1,0 +1,11 @@
+target
+*~
+*.swp
+*.class
+.classpath
+.project
+.settings
+secret.properties
+client-keystore.jks
+server-keystore.jks
+server_sign.properties
