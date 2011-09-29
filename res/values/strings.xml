@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Hello World, MainActivity!</string>
-    <string name="app_name">Sigimera Tablet App</string>
-    <string name="copyright">(C) 2011 Sigimera </string>
+    <string name="app_name">Sigimera</string>
+	<string name="version">0.1</string>
     <string name="login">Login</string>
+    <string name="crisisTypeHeader">Crisis Types</string>
+    <string name="settings">Settings</string>
+    <string name="about">About</string>
 </resources>

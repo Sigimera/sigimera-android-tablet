@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <PreferenceCategory android:title="General Settings" android:key="general">
+    <CheckBoxPreference android:key="uselocation" android:title="Use Location" android:summaryOff="Do not use current location." android:summaryOn="Use current location, e.g. GPS"></CheckBoxPreference></PreferenceCategory><PreferenceCategory android:title="Credentials" android:key="credentials">
+        <Preference android:key="username" android:title="Username" android:summary="Your username for http://www.sigimera.org"></Preference><Preference android:key="password" android:title="Password" android:summary="Your password for http://www.sigimera.org"></Preference>
+    </PreferenceCategory>
+    
+
+</PreferenceScreen>

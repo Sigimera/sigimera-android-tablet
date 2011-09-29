@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AppTheme">
+        <attr name="listDragShadowBackground" format="reference" />
+        <attr name="menuIconCamera" format="reference" />
+        <attr name="menuIconToggle" format="reference" />
+        <attr name="menuIconShare" format="reference" />
+    </declare-styleable>
+</resources>

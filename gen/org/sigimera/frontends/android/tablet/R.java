@@ -9,17 +9,128 @@ package org.sigimera.frontends.android.tablet;
 
 public final class R {
     public static final class attr {
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int listDragShadowBackground=0x7f010000;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int menuIconCamera=0x7f010001;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int menuIconShare=0x7f010003;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int menuIconToggle=0x7f010002;
+    }
+    public static final class color {
+        public static final int actionbar_background_dark=0x7f050000;
+        public static final int drag_active_color=0x7f050001;
     }
     public static final class drawable {
-        public static final int icon=0x7f020000;
+        public static final int ic_menu_camera_holo_dark=0x7f020000;
+        public static final int ic_menu_share_holo_dark=0x7f020001;
+        public static final int ic_menu_toggle_holo_dark=0x7f020002;
+        public static final int icon=0x7f020003;
+        public static final int logo=0x7f020004;
+    }
+    public static final class id {
+        public static final int camera=0x7f090002;
+        public static final int crisis_entry=0x7f090001;
+        public static final int crisis_list=0x7f090000;
+        public static final int share=0x7f090003;
+        public static final int showAboutDialog=0x7f090006;
+        public static final int showSettings=0x7f090005;
+        public static final int toggleTitles=0x7f090004;
     }
     public static final class layout {
-        public static final int main=0x7f030000;
+        public static final int action_bar_custom=0x7f030000;
+        public static final int category_list_entry=0x7f030001;
+        public static final int crisis_entry_list_entry=0x7f030002;
+        public static final int main=0x7f030003;
+    }
+    public static final class menu {
+        public static final int main_menu=0x7f080000;
     }
     public static final class string {
-        public static final int app_name=0x7f040001;
-        public static final int copyright=0x7f040002;
-        public static final int hello=0x7f040000;
-        public static final int login=0x7f040003;
+        public static final int about=0x7f060006;
+        public static final int app_name=0x7f060001;
+        public static final int crisisTypeHeader=0x7f060004;
+        public static final int hello=0x7f060000;
+        public static final int login=0x7f060003;
+        public static final int settings=0x7f060005;
+        public static final int version=0x7f060002;
     }
+    public static final class style {
+        public static final int ActionBar=0x7f070000;
+        public static final int ActionBar_Dark=0x7f070001;
+        public static final int AppTheme_Dark=0x7f070002;
+    }
+    public static final class xml {
+        public static final int settings=0x7f040000;
+    }
+    public static final class styleable {
+        /** Attributes that can be used with a AppTheme.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #AppTheme_listDragShadowBackground org.sigimera.frontends.android.tablet:listDragShadowBackground}</code></td><td></td></tr>
+           <tr><td><code>{@link #AppTheme_menuIconCamera org.sigimera.frontends.android.tablet:menuIconCamera}</code></td><td></td></tr>
+           <tr><td><code>{@link #AppTheme_menuIconShare org.sigimera.frontends.android.tablet:menuIconShare}</code></td><td></td></tr>
+           <tr><td><code>{@link #AppTheme_menuIconToggle org.sigimera.frontends.android.tablet:menuIconToggle}</code></td><td></td></tr>
+           </table>
+           @see #AppTheme_listDragShadowBackground
+           @see #AppTheme_menuIconCamera
+           @see #AppTheme_menuIconShare
+           @see #AppTheme_menuIconToggle
+         */
+        public static final int[] AppTheme = {
+            0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003
+        };
+        /**
+          <p>This symbol is the offset where the {@link org.sigimera.frontends.android.tablet.R.attr#listDragShadowBackground}
+          attribute's value can be found in the {@link #AppTheme} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name android:listDragShadowBackground
+        */
+        public static final int AppTheme_listDragShadowBackground = 0;
+        /**
+          <p>This symbol is the offset where the {@link org.sigimera.frontends.android.tablet.R.attr#menuIconCamera}
+          attribute's value can be found in the {@link #AppTheme} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name android:menuIconCamera
+        */
+        public static final int AppTheme_menuIconCamera = 1;
+        /**
+          <p>This symbol is the offset where the {@link org.sigimera.frontends.android.tablet.R.attr#menuIconShare}
+          attribute's value can be found in the {@link #AppTheme} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name android:menuIconShare
+        */
+        public static final int AppTheme_menuIconShare = 3;
+        /**
+          <p>This symbol is the offset where the {@link org.sigimera.frontends.android.tablet.R.attr#menuIconToggle}
+          attribute's value can be found in the {@link #AppTheme} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name android:menuIconToggle
+        */
+        public static final int AppTheme_menuIconToggle = 2;
+    };
 }

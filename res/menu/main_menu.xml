@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/camera"
+        android:title="Camera"
+        android:icon="?attr/menuIconCamera"
+        android:showAsAction="ifRoom" />
+    <item android:id="@+id/share"
+    	android:title="Share"
+    	android:icon="?attr/menuIconShare"
+    	android:showAsAction="ifRoom"/>
+    <item android:id="@+id/toggleTitles"
+        android:icon="?attr/menuIconToggle"
+        android:title="Toggle Navigation"
+        android:showAsAction="ifRoom"/>
+        <!-- android:showAsAction="ifRoom|withText" /-->
+    <!-- Items in the overflow menu -->
+    <item android:id="@+id/showSettings"
+        android:title="Settings"
+        android:showAsAction="never" />
+    <item android:id="@+id/showAboutDialog"
+        android:title="About"
+        android:showAsAction="never" />
+</menu>

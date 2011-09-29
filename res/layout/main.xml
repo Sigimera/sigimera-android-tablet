@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    >
+    android:weightSum="1" android:baselineAligned="false" android:orientation="horizontal">
+  
+  	<fragment class="org.sigimera.frontends.android.tablet.CrisisListFragment"
+            android:id="@+id/crisis_list"
+            android:visibility="gone"
+            android:layout_marginTop="?android:attr/actionBarSize"
+            android:layout_width="250dip"
+            android:layout_height="match_parent" />
+
+    <fragment class="org.sigimera.frontends.android.tablet.CrisisEntryFragment"
+            android:id="@+id/crisis_entry"
+			android:layout_marginTop="?android:attr/actionBarSize"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
 </LinearLayout>
