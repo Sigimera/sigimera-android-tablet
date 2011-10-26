@@ -28,7 +28,7 @@ public class CategoryHandler {
 	
 	public CategoryHandler() {
 		this.categories.add("Latest Crisis");
-		this.categories.add("Earthquake");
+		this.categories.add("Earthquake/Tsunami");
 		this.categories.add("Flood");
 		this.categories.add("Tropical Cyclone");
 		this.categories.add("Volcanic Eruption");

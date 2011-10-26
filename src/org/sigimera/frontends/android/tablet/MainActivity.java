@@ -4,11 +4,13 @@ import java.io.InputStream;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
+import android.app.ActionBar.TabListener;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -18,7 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-public class MainActivity extends Activity implements ActionBar.TabListener {
+public class MainActivity extends Activity implements TabListener {
 	private static final int REQUEST_CODE = 1;
 	private View actionBarView;
 	
@@ -27,10 +29,18 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
+        Configuration config = getResources().getConfiguration();
+        if ( config.orientation == Configuration.ORIENTATION_PORTRAIT ) {
+    		FragmentManager fragManager = getFragmentManager();
+    		CategoryListFragment crisisListFrag = (CategoryListFragment)fragManager.findFragmentById(R.id.category_list);
+    		if ( !crisisListFrag.isHidden() )
+    			fragManager.beginTransaction().hide(crisisListFrag).commit();
+        }
+        
         ActionBar actionBar = getActionBar();
 
         actionBar.addTab(actionBar.newTab().setText("By Type").setTabListener(this));
-        actionBar.addTab(actionBar.newTab().setText("By Country").setTabListener(this));
+//        actionBar.addTab(actionBar.newTab().setText("By Country").setTabListener(this));
         
         this.actionBarView = getLayoutInflater().inflate(R.layout.action_bar_custom, null);
         
@@ -39,7 +49,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         actionBar.setDisplayShowHomeEnabled(true);
         
-        if(savedInstanceState != null) {
+        if( savedInstanceState != null ) {
             int selectedTab = savedInstanceState.getInt("selectedTab");
             actionBar.selectTab(actionBar.getTabAt(selectedTab));
         }
@@ -55,25 +65,19 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
     	switch (item.getItemId()) {
+    		case R.id.refresh:
+    			Toast.makeText(this, "TODO: Refresh the cache (not implemented)...", Toast.LENGTH_SHORT).show();
+    			return true;
     		case R.id.share:
     			Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
-    			/**
-    			 * TODO: Share here the crisis URL...
-    			 */
+    			shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Try out the amazing Crisis Information Service.");
     			shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, "http://www.sigimera.org");
     			shareIntent.setType("text/plain");
     			this.startActivity(shareIntent);
     			return true;
-    		case R.id.camera:
-    			Intent intent = new Intent();
-    			intent.setType("image/*");
-    			intent.setAction(Intent.ACTION_GET_CONTENT);
-    			intent.addCategory(Intent.CATEGORY_OPENABLE);
-    			startActivityForResult(intent, REQUEST_CODE);
-    			return true;
     		case R.id.toggleTitles:
     			FragmentManager fragManager = getFragmentManager();
-    			CrisisListFragment crisisListFrag = (CrisisListFragment) fragManager.findFragmentById(R.id.crisis_list);
+    			CategoryListFragment crisisListFrag = (CategoryListFragment) fragManager.findFragmentById(R.id.category_list);
     			if ( crisisListFrag.isHidden() ) {
     				fragManager.beginTransaction().show(crisisListFrag).commit();
     			} else {
@@ -97,8 +101,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
     	super.onActivityResult(_requestCode, _resultCode, _data);
     	
     	if ( _resultCode == RESULT_CANCELED ) {
-    		Toast toast = Toast.makeText(this, "Process Cancelled!", 10000);
-    		toast.show();
+    		Toast.makeText(this, "Process Cancelled!", Toast.LENGTH_SHORT).show();
     	} else if ( _requestCode == REQUEST_CODE && _resultCode == RESULT_OK ) {
 			try {
 				InputStream stream = getContentResolver().openInputStream(_data.getData());
@@ -127,7 +130,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 	@Override
 	public void onTabReselected(Tab _tab, FragmentTransaction _ft) {
 		FragmentManager fragManager = getFragmentManager();
-		CrisisListFragment crisisListFrag = (CrisisListFragment)fragManager.findFragmentById(R.id.crisis_list);
+		CategoryListFragment crisisListFrag = (CategoryListFragment)fragManager.findFragmentById(R.id.category_list);
 		if ( crisisListFrag.isHidden() ) {
 			fragManager.beginTransaction().show(crisisListFrag).commit();
 		}
@@ -139,7 +142,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 	@Override
 	public void onTabSelected(Tab _tab, FragmentTransaction _ft) {
 		FragmentManager fragManager = getFragmentManager();
-		CrisisListFragment crisisListFrag = (CrisisListFragment)fragManager.findFragmentById(R.id.crisis_list);
+		CategoryListFragment crisisListFrag = (CategoryListFragment)fragManager.findFragmentById(R.id.category_list);
 		if ( crisisListFrag.isHidden() ) {
 			fragManager.beginTransaction().show(crisisListFrag).commit();
 		}
@@ -154,7 +157,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 	public void onTabUnselected(Tab _tab, FragmentTransaction _ft) {}
 	
     @Override
-    public void onSaveInstanceState (Bundle _outState) {
+    public void onSaveInstanceState(Bundle _outState) {
         super.onSaveInstanceState(_outState);
         ActionBar bar = getActionBar();
         int category = bar.getSelectedTab().getPosition();

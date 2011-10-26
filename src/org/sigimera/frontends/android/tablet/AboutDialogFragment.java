@@ -17,11 +17,11 @@
 
 package org.sigimera.frontends.android.tablet;
 
-import android.R.color;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.webkit.WebView;
 
@@ -47,7 +47,7 @@ public class AboutDialogFragment extends DialogFragment {
          dialog.setTitle("About");
          
          WebView wv = new WebView(getActivity());
-         wv.setBackgroundColor(color.background_dark);
+         wv.setBackgroundColor(Color.BLACK);
          
          StringBuffer strbuffer = new StringBuffer();
          strbuffer.append("<font color='white'>");

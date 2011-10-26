@@ -9,3 +9,4 @@ secret.properties
 client-keystore.jks
 server-keystore.jks
 server_sign.properties
+bin/*

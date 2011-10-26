@@ -1,10 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="12dp"
-    android:gravity="bottom"
-    android:textAppearance="?android:attr/textAppearanceMedium"
-    android:background="?android:attr/activatedBackgroundIndicator" >
-</TextView>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="6dip">
+    
+    <LinearLayout
+		android:orientation="vertical"
+        android:layout_width="250dip"
+        android:layout_height="wrap_content">
+    	
+    	<TextView
+    		android:id="@+id/crisisDate"
+    		android:layout_width="fill_parent"
+        	android:layout_height="fill_parent"
+        	android:gravity="center_horizontal|top"/>
+        	
+		<ImageView
+        	android:id="@+id/crisisEntryMap"
+        	android:layout_width="230dip"
+        	android:layout_height="120dip"
+        	android:src="@drawable/no_maps_available" />
+        	
+    </LinearLayout>
+        
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_weight="2"
+        android:layout_height="wrap_content">
+        
+        <TextView
+            android:id="@+id/crisisTitel"
+            android:layout_width="fill_parent"
+            android:typeface="serif"
+            android:textStyle="bold|italic"
+            android:layout_height="wrap_content"
+            android:textSize="10pt"
+            android:layout_weight="1"
+            android:gravity="top"/>
+            
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/crisisSummary"
+			android:gravity="top"/>
+        
+    </LinearLayout>
+        	
+	<TextView
+    		android:id="@+id/crisisReadMore"
+    		android:layout_width="wrap_content"
+        	android:layout_height="fill_parent"
+        	android:gravity="bottom"
+        	android:textColor="#ff8c00"
+        	android:text="@string/read_more"/>
+    
+</LinearLayout>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:id="@+id/crisisEntryMain">
+	
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:padding="12dip"
+		android:weightSum="1" android:baselineAligned="false" android:orientation="vertical">
+		
+		<TextView android:id="@+id/crisisEntryTitle"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:textStyle="bold|italic"
+			android:textSize="14pt"
+			android:gravity="center_horizontal"
+			android:layout_marginTop="?android:attr/actionBarSize"
+			android:text="" />          
+		              	
+		<TextView android:id="@+id/crisisEntryIssued"
+			android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:textStyle="italic"
+		    android:textSize="10pt"
+		    android:gravity="center_horizontal"
+		    android:text="" />
+		                        	
+		<TextView android:id="@+id/crisisEntryType"
+		    	      android:layout_width="fill_parent"
+		              android:layout_height="wrap_content"
+		              android:textStyle="italic"
+		              android:textSize="10pt"
+		              android:gravity="center_horizontal"
+		              android:text="" />
+
+		<LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:padding="6dip"
+			android:weightSum="1"
+			android:baselineAligned="false"
+			android:orientation="horizontal">
+			
+					<LinearLayout
+						android:layout_width="520px"
+						android:layout_height="wrap_content"
+						android:weightSum="1"
+						android:baselineAligned="false"
+						android:orientation="vertical">
+				
+						<ImageView android:id="@+id/crisisEntryDepiction"
+							android:layout_width="480px"
+							android:layout_height="240px"
+							android:gravity="center_horizontal"
+							android:layout_marginTop="?android:attr/actionBarSize"/>
+							
+						<!-- TABLE with additional information (under the map image) -->
+						<TableLayout
+							xmlns:android="http://schemas.android.com/apk/res/android"
+							android:id="@+id/crisisEntryTable"
+    						android:layout_width="match_parent"
+    						android:layout_height="match_parent"
+    						android:showDividers="middle"
+    						android:visibility="invisible"
+    						android:shrinkColumns="*"
+    						android:stretchColumns="*">
+    						    						
+							<TableRow
+								android:layout_width="match_parent"
+            					android:layout_height="wrap_content">
+            					<TextView
+            						android:text="Crisis Type"
+            						android:textStyle="bold|italic"
+            						android:textSize="10pt"/>
+								<TextView
+									android:id="@+id/crisisEntryTabletCrisisTypeValue"
+            						android:text="unknown"
+            						android:textSize="10pt"/>
+    						</TableRow>
+    						    						
+							<TableRow
+								android:layout_width="match_parent"
+            					android:layout_height="wrap_content">
+            					<TextView
+            						android:text="Risk Level"
+            						android:textStyle="bold|italic"
+            						android:textSize="10pt"/>
+								<TextView
+									android:id="@+id/crisisEntryTabletRiskLevelValue"
+            						android:text="unknown"
+            						android:textSize="10pt"/>
+    						</TableRow>
+    						
+							<TableRow
+								android:layout_width="match_parent"
+            					android:layout_height="wrap_content">
+            					<TextView
+            						android:text="Issued (Local)"
+            						android:textStyle="bold|italic"
+            						android:textSize="10pt"/>
+								<TextView
+									android:id="@+id/crisisEntryTabletIssuedLocalValue"
+            						android:text="unknown"
+            						android:textSize="10pt"/>
+    						</TableRow>
+    						
+							<TableRow
+								android:layout_width="match_parent"
+            					android:layout_height="wrap_content">
+            					<TextView
+            						android:text="Issued (GMT)"
+            						android:textStyle="bold|italic"
+            						android:textSize="10pt"/>
+								<TextView
+									android:id="@+id/crisisEntryTabletIssuedGMTValue"
+            						android:text="unknown"
+            						android:textSize="10pt"/>
+    						</TableRow>
+    						
+    						<TableRow
+								android:layout_width="match_parent"
+            					android:layout_height="wrap_content">
+            					<TextView
+            						android:text="Latitude"
+            						android:textStyle="bold|italic"
+            						android:textSize="10pt"/>
+								<TextView
+									android:id="@+id/crisisEntryTabletLatValue"
+            						android:text="0.0"
+            						android:textSize="10pt"/>
+    						</TableRow>
+    						
+							<TableRow
+								android:layout_width="match_parent"
+            					android:layout_height="wrap_content">
+            					<TextView
+            						android:text="Longitude"
+            						android:textStyle="bold|italic"
+            						android:textSize="10pt"/>
+								<TextView
+									android:id="@+id/crisisEntryTabletLongValue"
+            						android:text="0.0"
+            						android:textSize="10pt"/>
+    						</TableRow>
+    						
+						</TableLayout>
+						
+		        	</LinearLayout>
+		        
+		        	<TextView android:id="@+id/crisisEntryDescription"
+		       			android:layout_width="fill_parent"
+		        		android:layout_height="wrap_content"
+						android:textSize="9pt"
+						android:layout_marginTop="?android:attr/actionBarSize"
+		        		android:text="" />
+		                
+		</LinearLayout>
+	</LinearLayout>
+</ScrollView>

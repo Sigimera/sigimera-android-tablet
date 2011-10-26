@@ -10,6 +10,7 @@
                 <item name="android:actionBarStyle">@style/ActionBar.Dark</item>
                 <item name="android:windowActionBarOverlay">true</item>
                 <item name="listDragShadowBackground">@android:color/background_dark</item>
+                <item name="menuIconRefresh">@drawable/ic_menu_refresh_holo_dark</item>
                 <item name="menuIconCamera">@drawable/ic_menu_camera_holo_dark</item>
                 <item name="menuIconToggle">@drawable/ic_menu_toggle_holo_dark</item>
                 <item name="menuIconShare">@drawable/ic_menu_share_holo_dark</item>

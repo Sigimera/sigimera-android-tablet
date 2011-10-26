@@ -15,33 +15,15 @@
  * along with this software.  If not, see <http://www.gnu.org/licenses/>
  */
 
-package org.sigimera.frontends.android.tablet;
-
-import android.app.ListFragment;
-import android.os.Bundle;
+package org.sigimera.frontends.android.tablet.widget;
 
 /**
  * @author Alex Oberhauser
  */
-public class CrisisEntryFragment extends ListFragment {
-    
-	@Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-		 super.onActivityCreated(savedInstanceState);
-    }
-
-	/**
-	 * @param category
-	 * @param position
-	 */
-	public void updateContent(int _position) {
-		// TODO Auto-generated method stub
-		if ( _position == 0) {
-			
-		} else if ( _position == 1 ) {
-			
-		}
-		System.out.println("[TODO] Category = " + _position);
+public class WidgetItem {
+	public String text;
+	
+	public WidgetItem(String _text) {
+		this.text = _text; 
 	}
-    
 }
