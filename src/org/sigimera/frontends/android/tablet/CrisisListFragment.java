@@ -19,12 +19,12 @@ package org.sigimera.frontends.android.tablet;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.dom4j.DocumentException;
 import org.sigimera.frontends.android.tablet.data.CrisisEntity;
+import org.sigimera.frontends.android.tablet.extension.CrisisListAdapter;
 import org.sigimera.frontends.android.tablet.handler.CategoryHandler;
 import org.sigimera.frontends.android.tablet.handler.CrisisHandler;
 
@@ -34,7 +34,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 /**
@@ -42,7 +41,7 @@ import android.widget.Toast;
  */
 public class CrisisListFragment extends ListFragment {
 	
-	private List<Map<String, String>> dataList;
+	private List<Map<String, Object>> dataList;
 	private List<CrisisEntity> crisisList;
 	
 	private final Handler guiHandler = new Handler();
@@ -72,7 +71,7 @@ public class CrisisListFragment extends ListFragment {
 	public void updateContent(final int _tab, int _position) {
 		final String categoryName = new CategoryHandler().getCategoryName(_position);
 		
-		this.dataList = new ArrayList<Map<String, String>>();
+		this.dataList = new ArrayList<Map<String, Object>>();
 		
 		Thread worker = new Thread() {
 			@Override
@@ -91,20 +90,6 @@ public class CrisisListFragment extends ListFragment {
 					} else {
 						crisisList.clear();
 					}
-					
-					for ( CrisisEntity crisis : crisisList ) {
-						Map<String, String> entry = new HashMap<String, String>();
-						entry.put("crisisEntryMap", R.drawable.no_maps_available + "");
-						entry.put("crisisTitel", crisis.getTitle());
-    				
-						String crisisSummary = crisis.getDescription();
-						if ( crisisSummary.length() > 370 )
-							crisisSummary = crisisSummary.substring(0, 370) + "...";
-						entry.put("crisisSummary", crisisSummary);
-    				
-						entry.put("crisisDate", crisis.getIssued().toLocaleString());
-						dataList.add(entry);
-					}
         		} catch (MalformedURLException e) {
         			guiHandler.post(showNetworkConnectionError);
         		} catch (DocumentException e) {
@@ -119,9 +104,10 @@ public class CrisisListFragment extends ListFragment {
 	}
 	
 	private void updateCrisisEntriesInGUI() {
-		setListAdapter(new SimpleAdapter(getActivity(), dataList, R.layout.crisis_entry_list_entry, 
-				new String[] { "crisisEntryMap", "crisisTitel", "crisisSummary", "crisisDate" }, 
-				new int[] { R.id.crisisEntryMap, R.id.crisisTitel, R.id.crisisSummary, R.id.crisisDate }));
+		setListAdapter(new CrisisListAdapter(getActivity(), R.layout.crisis_entry_list_entry, crisisList));
+//		, 
+//				new String[] { "crisisMap", "crisisTitel", "crisisSummary", "crisisDate" }, 
+//				new int[] { R.id.crisisMap, R.id.crisisTitel, R.id.crisisSummary, R.id.crisisDate }));
 	}
 	
 	private void showNetworkConnectionError() {

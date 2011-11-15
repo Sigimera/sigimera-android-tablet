@@ -28,15 +28,17 @@ import java.util.List;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
+import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
+import org.jaxen.JaxenException;
 import org.sigimera.frontends.android.tablet.data.CrisisEntity;
 
 /**
  * @author Alex Oberhauser
  */
 public class CrisisHandler {
-	public static final String apiSearch = "http://api.sigimera.org/v1/crisis?access_token=CHANGEIT";
-	public static final String queryPrefix = "/rdf:RDF/rdf:Description";
+	private static final String apiSearch = "http://api.sigimera.org/v1/crisis?access_token=608fa0647bb8683b19870a7e2c666b95cef2a4ede241b265f98414aea42cef16";
+	private static final String queryPrefix = "/rdf:RDF/rdf:Description";
 	
 	private static List<CrisisEntity> getCrisis(String _category) throws MalformedURLException, DocumentException, URISyntaxException {
 		List<CrisisEntity> crisisList = new ArrayList<CrisisEntity>();
@@ -53,11 +55,35 @@ public class CrisisHandler {
 		for ( Element crisisElement : crisisEntries ) {
 			String crisisURI = crisisElement.valueOf("@rdf:about");
 			
+			if ( !crisisURI.startsWith("http://data.sigimera.org/crisis") )
+				continue;
 			CrisisEntity crisisEntity = new CrisisEntity(new URI(crisisURI));
 			
-			crisisEntity.setTitle(crisisElement.selectSingleNode("./dc:title").getText());
-			crisisEntity.setDescription(crisisElement.selectSingleNode("./dc:description").getText());
-			crisisEntity.setIssued(crisisElement.selectSingleNode("./dct:issued").getText());
+			try {
+				Node titleNode = XPathHandler.selectNode("//rdf:Description[@rdf:about='" + crisisURI + "']/dc:title", crisisDoc);
+				if ( titleNode != null )
+					crisisEntity.setTitle(titleNode.getText());
+				
+				Node descriptionNode = XPathHandler.selectNode("//rdf:Description[@rdf:about='" + crisisURI + "']/dc:description", crisisDoc);
+				if ( descriptionNode != null )
+					crisisEntity.setDescription(descriptionNode.getText());
+				
+				Node issuedNode = XPathHandler.selectNode("//rdf:Description[@rdf:about='" + crisisURI + "']/dct:issued", crisisDoc);
+				if ( issuedNode != null )
+					crisisEntity.setIssued(issuedNode.getText());
+				
+				Node latNode = XPathHandler.selectNode("//rdf:Description[@rdf:about='" + crisisURI + "']/geo:lat", crisisDoc);
+				if ( latNode != null )
+					crisisEntity.setLatitude(latNode.getText());
+				
+				Node longNode = XPathHandler.selectNode("//rdf:Description[@rdf:about='" + crisisURI + "']/geo:long", crisisDoc);
+				if ( longNode != null )
+					crisisEntity.setLongitude(longNode.getText());
+
+			} catch (JaxenException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 			crisisList.add(crisisEntity);
 		}

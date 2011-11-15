@@ -56,7 +56,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int crisisEntryDescription=0x7f0a000c;
         public static final int crisisEntryIssued=0x7f0a0002;
         public static final int crisisEntryMain=0x7f0a0000;
-        public static final int crisisEntryMap=0x7f0a000e;
         public static final int crisisEntryTable=0x7f0a0005;
         public static final int crisisEntryTabletCrisisTypeValue=0x7f0a0006;
         public static final int crisisEntryTabletIssuedGMTValue=0x7f0a0009;
@@ -66,6 +65,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int crisisEntryTabletRiskLevelValue=0x7f0a0007;
         public static final int crisisEntryTitle=0x7f0a0001;
         public static final int crisisEntryType=0x7f0a0003;
+        public static final int crisisMap=0x7f0a000e;
         public static final int crisisReadMore=0x7f0a0011;
         public static final int crisisSummary=0x7f0a0010;
         public static final int crisisTitel=0x7f0a000f;

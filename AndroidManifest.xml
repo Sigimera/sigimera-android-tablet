@@ -25,6 +25,7 @@
                 </activity>
                 <activity android:name=".Settings" android:label="@string/settings"/>
 				<activity android:name=".CrisisEntryActivity" android:label="@string/crisisEntryActivity">
+					<!--  XXX: Seams not to work... -->
 					<intent-filter>
     					<action android:name="android.intent.action.VIEW" />
     					<category android:name="android.intent.category.DEFAULT"/>
