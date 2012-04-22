@@ -34,6 +34,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 /**
@@ -105,9 +106,6 @@ public class CrisisListFragment extends ListFragment {
 	
 	private void updateCrisisEntriesInGUI() {
 		setListAdapter(new CrisisListAdapter(getActivity(), R.layout.crisis_entry_list_entry, crisisList));
-//		, 
-//				new String[] { "crisisMap", "crisisTitel", "crisisSummary", "crisisDate" }, 
-//				new int[] { R.id.crisisMap, R.id.crisisTitel, R.id.crisisSummary, R.id.crisisDate }));
 	}
 	
 	private void showNetworkConnectionError() {

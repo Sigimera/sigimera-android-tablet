@@ -37,7 +37,8 @@ import org.sigimera.frontends.android.tablet.data.CrisisEntity;
  * @author Alex Oberhauser
  */
 public class CrisisHandler {
-	private static final String apiSearch = "http://api.sigimera.org/v1/crisis?access_token=608fa0647bb8683b19870a7e2c666b95cef2a4ede241b265f98414aea42cef16";
+	private static final String ACCESS_TOKEN = "a50913f3b0cc9d4fc71afce6bc46679718064d3050e18274926821b33531efdd";
+	private static final String apiSearch = "http://api.sigimera.org/v1/crisis?access_token=" + ACCESS_TOKEN;
 	private static final String queryPrefix = "/rdf:RDF/rdf:Description";
 	
 	private static List<CrisisEntity> getCrisis(String _category) throws MalformedURLException, DocumentException, URISyntaxException {
