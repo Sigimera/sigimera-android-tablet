@@ -1,19 +1,22 @@
 /**
- * Copyright (C) 2011 by Sigimera * All Rights Reserved
+ * Sigimera Crises Information Platform Android Client
+ * Copyright (C) 2011-2012 by Sigimera
+ * All Rights Reserved
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by 
- * the Free Software Foundation, version 3 of the License.
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free
+ * Software Foundation; either version 2 of the License, or (at your option)
+ * any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of 
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ * more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with this software.  If not, see <http://www.gnu.org/licenses/>
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc., 51
+ * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-
 package org.sigimera.frontends.android.tablet;
 
 import java.net.MalformedURLException;
@@ -41,10 +44,10 @@ import android.widget.Toast;
  * @author Alex Oberhauser
  */
 public class CrisisListFragment extends ListFragment {
-	
+
 	private List<Map<String, Object>> dataList;
 	private List<CrisisEntity> crisisList;
-	
+
 	private final Handler guiHandler = new Handler();
 	private final Runnable updateCrisisEntries = new Runnable() {
 		@Override
@@ -52,14 +55,14 @@ public class CrisisListFragment extends ListFragment {
 			updateCrisisEntriesInGUI();
 		}
 	};
-	
+
 	private final Runnable showNetworkConnectionError = new Runnable() {
 		@Override
 		public void run() {
 			showNetworkConnectionError();
 		}
 	};
-	
+
 	@Override
     public void onActivityCreated(Bundle savedInstanceState) {
 		 super.onActivityCreated(savedInstanceState);
@@ -71,9 +74,9 @@ public class CrisisListFragment extends ListFragment {
 	 */
 	public void updateContent(final int _tab, int _position) {
 		final String categoryName = new CategoryHandler().getCategoryName(_position);
-		
+
 		this.dataList = new ArrayList<Map<String, Object>>();
-		
+
 		Thread worker = new Thread() {
 			@Override
 			public void run() {
@@ -103,26 +106,26 @@ public class CrisisListFragment extends ListFragment {
         };
         worker.start();
 	}
-	
+
 	private void updateCrisisEntriesInGUI() {
 		setListAdapter(new CrisisListAdapter(getActivity(), R.layout.crisis_entry_list_entry, crisisList));
 	}
-	
+
 	private void showNetworkConnectionError() {
 		Toast.makeText(getActivity(), "[ERROR] Not able to get crisis information...", Toast.LENGTH_LONG).show();
 	}
-	
+
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
     	String crisisID = this.crisisList.get(position).getCrisisID().toASCIIString();
     	Intent intent = new Intent(getActivity(), CrisisEntryActivity.class);
-    	
+
     	Bundle bundle = new Bundle();
     	bundle.putString("crisisid", crisisID);
     	intent.putExtras(bundle);
     	startActivity(intent);
     }
-    
+
     @Override
     public void onDestroy() {
     	super.onDestroy();

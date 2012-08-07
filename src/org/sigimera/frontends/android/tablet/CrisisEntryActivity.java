@@ -1,20 +1,22 @@
 /**
- * Copyright (C) 2011 by Sigimera
+ * Sigimera Crises Information Platform Android Client
+ * Copyright (C) 2011-2012 by Sigimera
  * All Rights Reserved
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by 
- * the Free Software Foundation, version 3 of the License.
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free
+ * Software Foundation; either version 2 of the License, or (at your option)
+ * any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of 
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ * more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with this software.  If not, see <http://www.gnu.org/licenses/>
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc., 51
+ * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-
 package org.sigimera.frontends.android.tablet;
 
 import java.io.IOException;
@@ -58,21 +60,21 @@ import android.widget.Toast;
 
 /**
  * Visualization of a single crisis entity.
- * 
+ *
  * @author Alex Oberhauser
  */
 public class CrisisEntryActivity extends Activity implements OnClickListener {
 	private static final int REQUEST_CODE = 1;
 	private String crisisID;
-	
+
 	private ActionBar actionBar;
 	private OnClickListener mapClickListener = this;
-	
+
 	private CrisisEntity crisis;
-	
+
 	private ImageView imageView;
 	private Drawable imageDrawable;
-	
+
 	private final Handler guiHandler = new Handler();
 	private final Runnable updateCrisisEntry = new Runnable() {
 		@Override
@@ -88,7 +90,7 @@ public class CrisisEntryActivity extends Activity implements OnClickListener {
 			}
 		}
 	};
-	
+
 	private final Runnable updateImageView = new Runnable() {
 		@Override
 		public void run() {
@@ -99,7 +101,7 @@ public class CrisisEntryActivity extends Activity implements OnClickListener {
 	    	imageView.setOnClickListener(mapClickListener);
 		}
 	};
-	
+
 	private synchronized Node selectNode(String _xpath, Document _doc) throws JaxenException {
 		 HashMap<String, String> nsMap = new HashMap<String, String>();
 		 nsMap.put("dc", "http://purl.org/dc/elements/1.1/");
@@ -108,13 +110,13 @@ public class CrisisEntryActivity extends Activity implements OnClickListener {
 		 nsMap.put("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
 		 nsMap.put("foaf", "http://xmlns.com/foaf/0.1/");
 		 nsMap.put("geo", "http://www.w3.org/2003/01/geo/wgs84_pos#");
-		 
+
 		 XPath xpath = new Dom4jXPath(_xpath);
 		 xpath.setNamespaceContext(new SimpleNamespaceContext(nsMap));
-		 
+
 		 return (Node) xpath.selectSingleNode(_doc);
 	}
-	
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,7 +124,7 @@ public class CrisisEntryActivity extends Activity implements OnClickListener {
 
         View v = findViewById(R.id.crisisEntryMain);
         v.setSystemUiVisibility(View.STATUS_BAR_HIDDEN);
-        
+
     	this.crisisID = null;
 
     	Bundle bundle = getIntent().getExtras();
@@ -134,17 +136,17 @@ public class CrisisEntryActivity extends Activity implements OnClickListener {
     	}
 
         this.actionBar = getActionBar();
-        
+
         this.actionBar.setTitle(this.crisisID);
         this.actionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_SHOW_TITLE);
         this.actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         this.actionBar.setDisplayShowHomeEnabled(true);
         this.actionBar.setDisplayHomeAsUpEnabled(true);
-    	
+
     	if ( this.crisis == null ) {
     		try {
 				this.crisis = new CrisisEntity(new URI(this.crisisID));
-		        
+
 		        Thread worker = new Thread() {
 					@Override
 					public void run() {
@@ -152,53 +154,53 @@ public class CrisisEntryActivity extends Activity implements OnClickListener {
 				    	Document doc;
 						try {
 							doc = reader.read(new URL(crisisID));
-	
+
 							Node title = selectNode("//rdf:Description/dc:title", doc);
 							if ( title != null )
 								crisis.setTitle(title.getStringValue());
-								
+
 							Node description = selectNode("//rdf:Description/dc:description", doc);
 							if ( description != null )
 								crisis.setDescription(description.getStringValue());
-							
+
 							Node issued = selectNode("//rdf:Description/dct:issued", doc);
 							if ( issued != null )
 								crisis.setIssued(issued.getStringValue());
-							
+
 							Node latitude = selectNode("//rdf:Description/geo:lat", doc);
 							if ( latitude != null )
 								crisis.setLatitude(latitude.getStringValue());
-							
+
 							Node longitude = selectNode("//rdf:Description/geo:long", doc);
 							if ( longitude != null )
 								crisis.setLongitude(longitude.getStringValue());
-							
+
 							Node crisisType = selectNode("//rdf:Description/crisis:hasCrisisType/@rdf:resource", doc);
 							if ( crisisType != null )
 								crisis.setCrisisType(crisisType.getStringValue());
-							
+
 							Node crisisLevel = selectNode("//rdf:Description/crisis:alertLevelAsgard", doc);
 							if ( crisisLevel == null )
 								crisisLevel = selectNode("//rdf:Description/crisis:alertLevelGdas", doc);
 							if ( crisisLevel != null )
 								crisis.setRiskLevel(crisisLevel.getStringValue());
-							
+
 							if ( longitude != null && latitude != null ) {
-								URL depictionURL = new URL("http://staticmap.openstreetmap.de/staticmap.php?center=" + 
-										latitude.getStringValue() + "," + 
-										longitude.getStringValue() + "&zoom=4&markers=" + 
-										latitude.getStringValue() + "," + 
-										longitude.getStringValue() + 
+								URL depictionURL = new URL("http://staticmap.openstreetmap.de/staticmap.php?center=" +
+										latitude.getStringValue() + "," +
+										longitude.getStringValue() + "&zoom=4&markers=" +
+										latitude.getStringValue() + "," +
+										longitude.getStringValue() +
 										",ol-marker&size=470x230&maptype=osmarenderer");
 				    			if ( depictionURL != null ) {
 									crisis.setDepictionURL(depictionURL.toString());
 				    			}
 							}
-							
+
 							/**
 							 * TODO: Set more values, e.g. location, risk level, ...
 							 */
-							
+
 			        		guiHandler.post(updateCrisisEntry);
 						} catch (MalformedURLException e) {
 							// TODO Auto-generated catch block
@@ -230,7 +232,7 @@ public class CrisisEntryActivity extends Activity implements OnClickListener {
     	}
 
     }
-    
+
     private void setTableValue(int _textviewID, String _text) {
     	TextView textView = (TextView)findViewById(_textviewID);
     	if ( _text != null && !_text.equals("") ) {
@@ -238,16 +240,16 @@ public class CrisisEntryActivity extends Activity implements OnClickListener {
     			textView.setText(_text);
     	}
     }
-    
+
     public void updateCrisisEntryInGUI() throws MalformedURLException, DocumentException {
     	this.actionBar.setTitle(this.crisis.getTitle());
-    
+
     	TextView crisisTitle = (TextView)findViewById(R.id.crisisEntryTitle);
     	crisisTitle.setText(this.crisis.getTitle());
-    	
+
     	TextView crisisID = (TextView)findViewById(R.id.crisisEntryType);
     	crisisID.setText(this.crisis.getCrisisType());
-    	
+
     	String riskLevel = this.crisis.getRiskLevel();
     	if ( "Green".equalsIgnoreCase(riskLevel.trim()) )
     		crisisTitle.setTextColor(Color.GREEN);
@@ -273,19 +275,19 @@ public class CrisisEntryActivity extends Activity implements OnClickListener {
     		};
     		worker.start();
     	}
-    	
+
     	TextView crisisDescription = (TextView)findViewById(R.id.crisisEntryDescription);
     	crisisDescription.setText(this.crisis.getDescription());
-    	
+
     	TextView crisisIssued = (TextView)findViewById(R.id.crisisEntryIssued);
     	Date issued = this.crisis.getIssued();
     	if ( issued != null )
     		crisisIssued.setText(issued.toLocaleString());
-    	
+
     	TableLayout crisisTable = (TableLayout)findViewById(R.id.crisisEntryTable);
     	if ( crisisTable != null )
     		crisisTable.setVisibility(TableLayout.VISIBLE);
-    	
+
     	setTableValue(R.id.crisisEntryTabletLatValue, this.crisis.getLatitude());
     	setTableValue(R.id.crisisEntryTabletLongValue, this.crisis.getLongitude());
     	setTableValue(R.id.crisisEntryTabletRiskLevelValue, this.crisis.getRiskLevel());
@@ -293,14 +295,14 @@ public class CrisisEntryActivity extends Activity implements OnClickListener {
     	setTableValue(R.id.crisisEntryTabletIssuedLocalValue, this.crisis.getIssued().toLocaleString());
     	setTableValue(R.id.crisisEntryTabletIssuedGMTValue, this.crisis.getIssued().toGMTString());
     }
-    
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.entry_menu, menu);
     	return true;
     }
-    
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
     	switch (item.getItemId()) {
@@ -336,14 +338,14 @@ public class CrisisEntryActivity extends Activity implements OnClickListener {
     	}
     	return false;
     }
-    
+
     private void showAboutDialog() {
         FragmentTransaction ft = getFragmentManager().beginTransaction();
 
         DialogFragment newFragment = AboutDialogFragment.newInstance();
         newFragment.show(ft, "dialog");
     }
-    
+
     @Override
     public void onSaveInstanceState(Bundle _outState) {
         super.onSaveInstanceState(_outState);
@@ -357,12 +359,12 @@ public class CrisisEntryActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View _view) {
 		if ( _view.getId() == R.id.crisisEntryDepiction ) {
-			String uri = "geo:" + this.crisis.getLatitude() + "," + this.crisis.getLongitude() 
-				+ "?q=" + this.crisis.getLatitude()  + "," + this.crisis.getLongitude() 
+			String uri = "geo:" + this.crisis.getLatitude() + "," + this.crisis.getLongitude()
+				+ "?q=" + this.crisis.getLatitude()  + "," + this.crisis.getLongitude()
 				+ "(" + this.crisis.getTitle().replace(" ", "+").replace("(", "[").replace(")", "]") + ")";
 			startActivity(new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri)));
 		}
-		
+
 	}
-    
+
 }

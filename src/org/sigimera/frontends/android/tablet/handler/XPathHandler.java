@@ -1,20 +1,22 @@
 /**
- * Copyright (C) 2011 by Sigimera
+ * Sigimera Crises Information Platform Android Client
+ * Copyright (C) 2011-2012 by Sigimera
  * All Rights Reserved
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by 
- * the Free Software Foundation, version 3 of the License.
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free
+ * Software Foundation; either version 2 of the License, or (at your option)
+ * any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of 
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ * more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with this software.  If not, see <http://www.gnu.org/licenses/>
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc., 51
+ * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-
 package org.sigimera.frontends.android.tablet.handler;
 
 import java.util.HashMap;
@@ -30,7 +32,7 @@ import org.jaxen.dom4j.Dom4jXPath;
  * @author Alex Oberhauser
  */
 public abstract class XPathHandler {
-	
+
 	public static Node selectNode(String _xpath, Document _doc) throws JaxenException {
 		 HashMap<String, String> nsMap = new HashMap<String, String>();
 		 nsMap.put("dc", "http://purl.org/dc/elements/1.1/");
@@ -39,11 +41,11 @@ public abstract class XPathHandler {
 		 nsMap.put("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
 		 nsMap.put("foaf", "http://xmlns.com/foaf/0.1/");
 		 nsMap.put("geo", "http://www.w3.org/2003/01/geo/wgs84_pos#");
-		 
+
 		 XPath xpath = new Dom4jXPath(_xpath);
 		 xpath.setNamespaceContext(new SimpleNamespaceContext(nsMap));
-		 
+
 		 return (Node) xpath.selectSingleNode(_doc);
 	}
-	
+
 }
