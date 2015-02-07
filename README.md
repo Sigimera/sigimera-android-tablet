@@ -20,7 +20,6 @@ Contact
 -------
 
 * E-Mail:     support [at] sigimera [dot] org
-* Developers: http://www.sigimera.org/about
 
 
 License
